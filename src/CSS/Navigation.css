@@ -1,0 +1,120 @@
+.navbar {
+  background-color: #f5d65a;
+  display: block;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.navbar-brand .nav-brand-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  opacity: 1;
+}
+
+.navbar-brand .nav-brand-title:hover {
+  opacity: 0.7;
+}
+
+.nav-logo {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar-nav .nav-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000;
+  opacity: 1;
+  margin-right: 20px;
+}
+
+.navbar-nav .nav-link:hover {
+  opacity: 0.7;
+}
+
+.navbar .navbar-toggler {
+  border: none;
+}
+
+.navbar .navbar-toggler:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar .btn-close {
+  border: none;
+}
+
+.navbar .btn-close:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar .navbar-toggler-icon {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  background-image: var(--bs-navbar-toggler-icon-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+.navbar .btn-nav {
+  background-color: transparent;
+  color: #0c2428;
+  border: 2px solid #0c2428;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.4s;
+}
+
+.navbar .btn-nav:hover {
+  background-color: #0c2428;
+  color: #f5d65a;
+  border: transparent;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+  transform: scaleX(1.1);
+}
+
+@media screen and (max-width: 992px) {
+  .navbar .sidebar {
+    background-color: #f5d65a;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(20px);
+  }
+
+  .navbar .sidebar .nav-link {
+    margin-right: 0;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #000;
+    opacity: 1;
+  }
+  .navbar .sidebar .nav-link:hover {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-brand .nav-brand-title {
+    font-size: 0.8rem;
+  }
+
+  .nav-logo {
+    width: 20px;
+    height: 20px;
+  }
+
+  .navbar-nav .nav-link {
+    margin-right: 0;
+    font-size: 0.8rem;
+  }
+
+  .navbar .navbar-toggler-icon {
+    width: 1em;
+    height: 1em;
+  }
+}

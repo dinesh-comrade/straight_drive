@@ -1,0 +1,120 @@
+.login-form {
+  padding: 15% 0;
+  background-color: #0c2428;
+  height: 100vh;
+  color: #fff;
+}
+
+.login-container {
+  margin: 0 auto;
+}
+
+.login-body {
+  margin: 0 auto;
+  margin-top: 4%;
+  padding: 0 30%;
+}
+
+.login-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.login-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 400;
+  border-bottom: 1px solid #fff;
+  transition: all 0.3s;
+}
+
+.login-input:focus {
+  border: 2px solid #f5a623;
+}
+
+.login-input::placeholder {
+  color: #0c2428;
+}
+
+.login-input:focus::placeholder {
+  color: #f5a623;
+}
+
+.login-form .btn-resend {
+  font-size: 0.9rem;
+  border: none;
+  color: #aaa;
+  transition: all 0.3s;
+}
+
+.login-form .btn-resend:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.login-form .btn-resend:focus {
+  border: none;
+  color: #fff;
+}
+
+.login-form .btn-resend:active {
+  color: #fff;
+}
+
+.login-form .btn-login {
+  background-color: #f5a623;
+  color: #000;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.login-form .btn-login:hover {
+  background-color: #000;
+  color: #f5a623;
+  box-shadow: 0 0 10px 0 #f5a623;
+  transform: translateY(-5px);
+}
+
+.error-message {
+  color: red;
+  font-size: 0.8rem;
+}
+
+@media screen and (max-width: 768px) {
+  .login-form {
+    padding: 40% 0;
+  }
+
+  .login-body {
+    margin-top: 2%;
+    padding: 0 10%;
+  }
+
+  .login-label {
+    font-size: 1rem;
+  }
+
+  .login-input {
+    font-size: 0.9rem;
+  }
+
+  .login-form .btn-resend {
+    font-size: 0.8rem;
+  }
+
+  .login-form .btn-login {
+    font-size: 0.9rem;
+  }
+
+  .error-message {
+    font-size: 0.7rem;
+  }
+}
