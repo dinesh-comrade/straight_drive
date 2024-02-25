@@ -111,7 +111,7 @@ const Login = () => {
                   <div className="col-sm-10">
                     <input
                       type="tel"
-                      className="form-control"
+                      className="login-input"
                       value={otp}
                       id="exampleFormControlInput1 validationCustom02"
                       placeholder="Enter the OTP"
