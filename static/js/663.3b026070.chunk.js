@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkstraight_drive=self.webpackChunkstraight_drive||[]).push([[663],{663:(a,s,e)=>{e.r(s),e.d(s,{default:()=>c});e(43);var t=e(579);const c=()=>(0,t.jsx)("main",{className:"data-logs",children:(0,t.jsx)("div",{className:"container",children:(0,t.jsx)("div",{className:"data-logs-content",children:(0,t.jsx)("h1",{className:"h1-data",children:"Data Logs"})})})})}}]);
+//# sourceMappingURL=663.3b026070.chunk.js.map

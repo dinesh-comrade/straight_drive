@@ -1,2 +1,0 @@
-.carousel .slider-img{animation:zoom 4s linear infinite;background-position:50%;background-repeat:no-repeat;background-size:cover;height:100vh;max-width:100%;object-fit:cover;object-position:top bottom;position:relative}@keyframes zoom{0%{transform:scale(1)}25%{transform:scale(1.04)}50%{transform:scale(1.08)}75%{transform:scale(1.12)}to{transform:scale(1.16)}}@media screen and (max-width:768px){.carousel .slider-img{height:60vh}}
-/*# sourceMappingURL=141.50b4dbe4.chunk.css.map*/
