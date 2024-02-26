@@ -1,66 +1,40 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React from "react";
 import "../CSS/Home.css";
-import automated1 from "../assets/Carousel/automated1.png";
-import automated2 from "../assets/Carousel/automated2.png";
-import automated3 from "../assets/Carousel/automated3.png";
-import automated4 from "../assets/Carousel/automated4.png";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div
-      id="carouselExampleInterval"
-      className="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div className="carousel-inner">
-        <div className="carousel-item active" data-bs-interval={3000}>
-          <img
-            src={automated1}
-            className="d-block w-100 slider-img "
-            alt="automated1"
-          />
-        </div>
-        <div className="carousel-item" data-bs-interval={3000}>
-          <img
-            src={automated2}
-            className="d-block w-100 slider-img "
-            alt="automated2"
-          />
-        </div>
-        <div className="carousel-item" data-bs-interval={3000}>
-          <img
-            src={automated3}
-            className="d-block w-100 slider-img "
-            alt="automated3"
-          />
-        </div>
-        <div className="carousel-item" data-bs-interval={3000}>
-          <img
-            src={automated4}
-            className="d-block w-100 slider-img "
-            alt="automated4"
-          />
+    <header className="home">
+      <div className="container">
+        <div className="home-content">
+          <h1 className="h1-home">Straight Drive Sports & Leisure Pvt Ltd</h1>
+          <p className="p-home">
+            Straight Drive Cricket Simulators are most popular cricket
+            simulators in market with hundreds of installations across the
+            world. Straight Drive is believed by bigger brands in the market and
+            is a rapidly updating its features time to time. If you have an
+            entertainment facility you should have a cricket simulator from
+            Straight Drive.
+          </p>
+          <div className="d-flex justify-content-center">
+            <a
+              href="https://straightdrive.in/"
+              target="_blank"
+              className="btn btn-visitors rounded-pill px-4 py-1"
+            >
+              Visitors
+            </a>
+            <Link
+              to="/straight_drive/login"
+              className="btn btn-login rounded-pill px-4 py-1 ms-3"
+            >
+              Login
+            </Link>
+          </div>
         </div>
       </div>
-      <button
-        className="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="prev"
-      >
-        <span className="carousel-control-prev-icon" aria-hidden="true" />
-        <span className="visually-hidden">Previous</span>
-      </button>
-      <button
-        className="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleInterval"
-        data-bs-slide="next"
-      >
-        <span className="carousel-control-next-icon" aria-hidden="true" />
-        <span className="visually-hidden">Next</span>
-      </button>
-    </div>
+    </header>
   );
 };
 

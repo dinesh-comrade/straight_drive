@@ -7,6 +7,7 @@ function App() {
 
   const Home = lazy(() => import("./Components/Home"));
   const Login = lazy(() => import("./Components/Login"));
+  const Data = lazy(() => import("./Components/Data"));
 
   return (
     <Router>
@@ -19,6 +20,11 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/straight_drive/login" element={<Login />} />
+        </Routes>
+      </Suspense>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/straight_drive/data-logs" element={<Data />} />
         </Routes>
       </Suspense>
     </Router>

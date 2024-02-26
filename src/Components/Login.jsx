@@ -1,6 +1,8 @@
 import React from "react";
 import "../CSS/Login.css";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +11,9 @@ const Login = () => {
   const [otpError, setOtpError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
 
-  const handleSubmit = (e) => {
+  const history = useNavigate();
+
+  const handleOTPSubmit = (e) => {
     e.preventDefault();
     console.log(email, otp);
     setEmail("");
@@ -17,6 +21,7 @@ const Login = () => {
     setEmailError("");
     setOtpError("");
     setOtpSent(false);
+    history("/straight_drive/data-logs");
   };
 
   const handleEmailSubmit = (e) => {
@@ -47,7 +52,7 @@ const Login = () => {
     setOtp(otp);
 
     const validateOtp = (otp) => {
-      const otpRegex = /^[0-9]{6}$/;
+      const otpRegex = /^[0-9]{4}$/;
       return otpRegex.test(otp);
     };
 
@@ -133,14 +138,16 @@ const Login = () => {
                 </div>
                 <div className="mb-3 row justify-content-end">
                   <div className="col-lg-4 col-md-2 col-sm-2 col-12 d-flex justify-content-end">
-                    <button
-                      className="btn btn-primary px-4 py-1 rounded-pill btn-login"
-                      type="submit"
-                      disabled={!isOtpValid()}
-                      onClick={handleSubmit}
-                    >
-                      Login
-                    </button>
+                    <Link to="/straight_drive/data-logs">
+                      <button
+                        className="btn btn-primary px-4 py-1 rounded-pill btn-login"
+                        type="button"
+                        disabled={!isOtpValid()}
+                        onClick={handleOTPSubmit}
+                      >
+                        Login
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </>
