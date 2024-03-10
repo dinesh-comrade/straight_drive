@@ -3,19 +3,121 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  padding: 10% 0;
+  height: 100%;
   background-color: #0c2428;
   color: #fff;
   position: relative;
 }
 
-.data-logs-content {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+/* .data-title {
+} */
+
+.data-logs-body {
+  margin-top: 2%;
+  padding: 0 25%;
+}
+
+.data-logs-body .select-data {
+  width: 100%;
+}
+
+.data-label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.data-select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 400;
+  border-bottom: 1px solid #fff;
+  transition: all 0.3s;
+}
+
+.calendar-container {
   padding: 0 20%;
-  z-index: 1;
+}
+
+.data-select:focus {
+  border: 2px solid #f5a623;
+}
+
+.data-logs .react-calendar {
+  font-size: 0.8rem;
+}
+
+.data-logs .react-calendar .react-calendar__month-view__weekdays__weekday {
+  color: #000;
+}
+
+.data-logs .react-calendar .react-calendar__navigation {
+  margin-bottom: 0;
+}
+
+.data-logs .btn-datas {
+  background-color: #f5a623;
+  color: #000;
+  border: none;
+  margin-top: 1%;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.data-logs .btn-datas:hover {
+  background-color: #000;
+  color: #f5a623;
+  box-shadow: 0 0 10px 0 #f5a623;
+  transform: translateY(-5px);
+}
+
+.data-logs .btn-datas:active {
+  color: #f5a623;
+}
+
+.data-logs .arrows {
+  width: 50%;
+  height: 50%;
+  margin-top: 140%;
+  margin-bottom: 0%;
+  filter: drop-shadow(0 0 7px #f5a623);
+}
+
+@media screen and (max-width: 768px) {
+  .data-logs {
+    padding: 10% 0;
+  }
+  .data-logs-body {
+    padding: 0 10%;
+  }
+
+  .data-label {
+    font-size: 0.9rem;
+  }
+
+  .data-select {
+    font-size: 0.9rem;
+  }
+
+  .data-logs .react-calendar {
+    font-size: 0.7rem;
+  }
+
+  .data-logs .btn-datas {
+    font-size: 1rem;
+  }
+
+  .data-logs .arrows {
+    width: 15%;
+    height: 15%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
 }
