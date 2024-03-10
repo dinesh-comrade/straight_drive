@@ -88,12 +88,22 @@
   margin-top: 140%;
   margin-bottom: 0%;
   filter: drop-shadow(0 0 7px #f5a623);
+  transition: all 0.3s;
+}
+
+.data-logs .arrows:hover {
+  transform: scale(1.1);
+}
+
+.data-logs .ag-root-wrapper {
+  font-size: 0.8rem;
 }
 
 @media screen and (max-width: 768px) {
   .data-logs {
     padding: 15% 0;
   }
+
   .data-logs-body {
     padding: 0 10%;
   }
@@ -119,5 +129,9 @@
     height: 15%;
     margin-top: 10%;
     margin-bottom: 10%;
+  }
+
+  .data-logs .ag-root-wrapper {
+    font-size: 0.7rem;
   }
 }

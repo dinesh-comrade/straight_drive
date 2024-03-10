@@ -1,10 +1,71 @@
-import React from "react";
+import { useState, useEffect, useMemo } from "react";
+import axios from "axios";
 import "../CSS/Data.css";
 import arrows from "../assets/arrows.svg";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import { AgGridReact } from "ag-grid-react";
+import "ag-grid-community/styles/ag-grid.css";
+import "ag-grid-community/styles/ag-theme-alpine.css";
 
 const Data = () => {
+  const [rowData, setRowData] = useState([]);
+
+  const [colDefs, setColDefs] = useState([
+    { field: "athlete", filter: "agTextColumnFilter", tooltipField: "country" },
+    { field: "age", filter: "agNumberColumnFilter" },
+    { field: "country", filter: "agTextColumnFilter" },
+    {
+      field: "date",
+      filter: "agDateColumnFilter",
+      filterParams: {
+        comparator: function (filterLocalDateAtMidnight, cellValue) {
+          var dateParts = cellValue.split("/");
+          var cellDate = new Date(
+            Number(dateParts[2]),
+            Number(dateParts[1]) - 1,
+            Number(dateParts[0])
+          );
+          if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
+            return 0;
+          }
+          if (cellDate < filterLocalDateAtMidnight) {
+            return -1;
+          }
+          if (cellDate > filterLocalDateAtMidnight) {
+            return 1;
+          }
+        },
+      },
+    },
+  ]);
+
+  useEffect(() => {
+    axios
+      .get("https://www.ag-grid.com/example-assets/olympic-winners.json")
+      .then((res) => {
+        setRowData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const defaultColDef = useMemo(
+    () => ({
+      sortable: true,
+      filter: true,
+      floatingFilter: true,
+      filterParams: {
+        debounceMs: 200,
+      },
+      flex: 1,
+      minWidth: 100,
+      resizable: true,
+    }),
+    []
+  );
+
   return (
     <main className="data-logs">
       <div className="container">
@@ -88,6 +149,28 @@ const Data = () => {
                 Show Datas
               </button>
             </div>
+          </div>
+        </div>
+        <div className="mb-3 row mt-5">
+          <div
+            className="ag-theme-alpine"
+            style={{
+              height: "800px",
+              width: "100%",
+            }}
+          >
+            <AgGridReact
+              popupParent={document.body}
+              rowData={rowData}
+              columnDefs={colDefs}
+              defaultColDef={defaultColDef}
+              animateRows={true}
+              pagination={true}
+              paginationPageSize={10}
+              paginationPageSizeSelector={false}
+              paginationAutoPageSize={false}
+              domLayout="autoHeight"
+            ></AgGridReact>
           </div>
         </div>
       </div>
