@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/straight_drive/static/css/main.491603b6.css",
-    "main.js": "/straight_drive/static/js/main.cb579ae5.js",
+    "main.js": "/straight_drive/static/js/main.90471725.js",
     "static/css/865.20b36cce.chunk.css": "/straight_drive/static/css/865.20b36cce.chunk.css",
     "static/js/865.eeccdb04.chunk.js": "/straight_drive/static/js/865.eeccdb04.chunk.js",
     "static/css/571.121ecd17.chunk.css": "/straight_drive/static/css/571.121ecd17.chunk.css",
     "static/js/571.75adc57b.chunk.js": "/straight_drive/static/js/571.75adc57b.chunk.js",
-    "static/css/492.8d8fca98.chunk.css": "/straight_drive/static/css/492.8d8fca98.chunk.css",
+    "static/css/492.1e425e63.chunk.css": "/straight_drive/static/css/492.1e425e63.chunk.css",
     "static/js/492.79da776d.chunk.js": "/straight_drive/static/js/492.79da776d.chunk.js",
     "static/js/729.65d41bdc.chunk.js": "/straight_drive/static/js/729.65d41bdc.chunk.js",
     "static/media/home_lap.png": "/straight_drive/static/media/home_lap.a80127aa2ae50201c57d.png",
@@ -14,17 +14,17 @@
     "static/media/arrows.svg": "/straight_drive/static/media/arrows.fb25130ec5d6552cb043a58b3f0df97a.svg",
     "index.html": "/straight_drive/index.html",
     "main.491603b6.css.map": "/straight_drive/static/css/main.491603b6.css.map",
-    "main.cb579ae5.js.map": "/straight_drive/static/js/main.cb579ae5.js.map",
+    "main.90471725.js.map": "/straight_drive/static/js/main.90471725.js.map",
     "865.20b36cce.chunk.css.map": "/straight_drive/static/css/865.20b36cce.chunk.css.map",
     "865.eeccdb04.chunk.js.map": "/straight_drive/static/js/865.eeccdb04.chunk.js.map",
     "571.121ecd17.chunk.css.map": "/straight_drive/static/css/571.121ecd17.chunk.css.map",
     "571.75adc57b.chunk.js.map": "/straight_drive/static/js/571.75adc57b.chunk.js.map",
-    "492.8d8fca98.chunk.css.map": "/straight_drive/static/css/492.8d8fca98.chunk.css.map",
+    "492.1e425e63.chunk.css.map": "/straight_drive/static/css/492.1e425e63.chunk.css.map",
     "492.79da776d.chunk.js.map": "/straight_drive/static/js/492.79da776d.chunk.js.map",
     "729.65d41bdc.chunk.js.map": "/straight_drive/static/js/729.65d41bdc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.491603b6.css",
-    "static/js/main.cb579ae5.js"
+    "static/js/main.90471725.js"
   ]
 }
