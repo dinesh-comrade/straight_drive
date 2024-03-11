@@ -1,14 +1,40 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, forwardRef } from "react";
 import axios from "axios";
 import "../CSS/Data.css";
 import arrows from "../assets/arrows.svg";
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import calendar from "../assets/calendar.svg";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 
 const Data = () => {
+  const [fromDate, setFromDate] = useState(null);
+  const [toDate, setToDate] = useState(null);
+
+  const CustomInput = forwardRef(({ value, onClick }, ref) => (
+    <>
+      <div className="input-group">
+        <span
+          className="input-group-text"
+          id="basic-addon1"
+          onClick={onClick}
+          ref={ref}
+        >
+          <img src={calendar} alt="calendar" className="calendar-icon" />
+        </span>
+        <input
+          value={value}
+          onChange={() => {}}
+          className="form-control"
+          aria-label="Calendar"
+          aria-describedby="basic-addon1"
+        />
+      </div>
+    </>
+  ));
+
   const [rowData, setRowData] = useState([]);
 
   const [colDefs, setColDefs] = useState([
@@ -115,13 +141,17 @@ const Data = () => {
           </div>
           <div className="mb-3 row">
             <div className="col-lg-5 col-md-4 col-sm-2">
-              <div>
-                <label htmlFor="fromDate" className="data-label">
+              <div className="Date-container fromDate-container">
+                <label htmlFor="fromDate" className="date-label">
                   From Date
                 </label>
-                <div>
-                  <Calendar id="fromDate" className="calendar" />
-                </div>
+                <DatePicker
+                  id="fromDate"
+                  selected={fromDate}
+                  onChange={(date) => setFromDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  customInput={<CustomInput />}
+                />
               </div>
             </div>
             <div className="col-lg-2 col-md-1 col-sm-1">
@@ -130,13 +160,17 @@ const Data = () => {
               </div>
             </div>
             <div className="col-lg-5 col-md-4 col-sm-1">
-              <div>
-                <label htmlFor="toDate" className="data-label">
+              <div className="Date-container">
+                <label htmlFor="toDate" className="date-label">
                   To Date
                 </label>
-                <div>
-                  <Calendar id="toDate" className="calendar" />
-                </div>
+                <DatePicker
+                  id="toDate"
+                  selected={toDate}
+                  onChange={(date) => setToDate(date)}
+                  dateFormat="dd/MM/yyyy"
+                  customInput={<CustomInput />}
+                />
               </div>
             </div>
           </div>
