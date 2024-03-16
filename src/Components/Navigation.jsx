@@ -4,8 +4,10 @@ import React from "react";
 import "../CSS/Navigation.css";
 import Logo from "../assets/Logo/logo.png";
 import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Navigation = () => {
+  const { isloggedIn, handleLogOut } = useAuth();
   return (
     <nav className="navbar navbar-expand-lg fixed-top">
       <div className="container">
@@ -75,15 +77,32 @@ const Navigation = () => {
               className="d-flex justify-content-center align-items-center"
               role="form"
             >
-              <Link to="/straight_drive/login" className="links">
-                <button
-                  className="btn btn-nav btn-outline-success rounded-pill px-4 py-1"
-                  type="button"
-                  data-bs-dismiss="offcanvas"
-                >
-                  Login
-                </button>
-              </Link>
+              {isloggedIn ? (
+                <>
+                  <Link to="/straight_drive/login" className="links">
+                    <button
+                      className="btn btn-nav btn-outline-success rounded-pill px-4 py-1"
+                      type="button"
+                      onClick={handleLogOut}
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Logout
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/straight_drive/login" className="links">
+                    <button
+                      className="btn btn-nav btn-outline-success rounded-pill px-4 py-1"
+                      type="button"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Login
+                    </button>
+                  </Link>
+                </>
+              )}
             </form>
           </div>
         </div>

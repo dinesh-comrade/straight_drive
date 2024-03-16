@@ -1,43 +1,18 @@
-import { useState, useEffect, useMemo, forwardRef } from "react";
-import axios from "axios";
+import { useState, useMemo } from "react";
 import "../CSS/Data.css";
 import arrows from "../assets/arrows.svg";
-import calendar from "../assets/calendar.svg";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
+import { useAuth } from "../Context/AuthContext";
 
 const Data = () => {
-  const [fromDate, setFromDate] = useState(null);
-  const [toDate, setToDate] = useState(null);
+  const { fromDate, setFromDate, toDate, setToDate, CustomInput, rowData } =
+    useAuth();
 
-  const CustomInput = forwardRef(({ value, onClick }, ref) => (
-    <>
-      <div className="input-group">
-        <span
-          className="input-group-text"
-          id="basic-addon1"
-          onClick={onClick}
-          ref={ref}
-        >
-          <img src={calendar} alt="calendar" className="calendar-icon" />
-        </span>
-        <input
-          value={value}
-          onChange={() => {}}
-          className="form-control"
-          aria-label="Calendar"
-          aria-describedby="basic-addon1"
-        />
-      </div>
-    </>
-  ));
-
-  const [rowData, setRowData] = useState([]);
-
-  const [colDefs, setColDefs] = useState([
+  const [colDefs] = useState([
     { field: "athlete", filter: "agTextColumnFilter", tooltipField: "country" },
     { field: "age", filter: "agNumberColumnFilter" },
     { field: "country", filter: "agTextColumnFilter" },
@@ -65,17 +40,6 @@ const Data = () => {
       },
     },
   ]);
-
-  useEffect(() => {
-    axios
-      .get("https://www.ag-grid.com/example-assets/olympic-winners.json")
-      .then((res) => {
-        setRowData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   const defaultColDef = useMemo(
     () => ({
