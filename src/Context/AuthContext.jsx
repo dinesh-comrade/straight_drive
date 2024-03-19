@@ -22,22 +22,44 @@ export const AuthProvider = ({ children }) => {
 
   const history = useNavigate();
 
-  const handleOTPSubmit = (e) => {
-    e.preventDefault();
-    console.log(email, otp);
-    setEmail("");
-    setOtp("");
-    setEmailError("");
-    setOtpError("");
-    setOtpSent(false);
-    setIsLoggedIn(true);
-    history("/straight_drive/data-logs");
+  const handleGetOtp = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await axios.post(
+        "https://api.straightdrive.xyz/sd/orbit/login/otp",
+        {
+          email,
+        }
+      );
+      console.log(response);
+      console.log("OTP Sent");
+      setOtpSent(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const handleEmailSubmit = (e) => {
-    e.preventDefault();
-    console.log("first submit", email);
-    setOtpSent(true);
+  const handleOTPSubmit = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await axios.post(
+        "https://api.straightdrive.xyz/sd/orbit/login/validateotp",
+        {
+          email,
+          otp,
+        }
+      );
+      console.log(email, otp, response.data);
+      setEmail("");
+      setOtp("");
+      setEmailError("");
+      setOtpError("");
+      setOtpSent(false);
+      setIsLoggedIn(true);
+      history("/straight_drive/data-logs");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleEmailChange = (event) => {
@@ -142,7 +164,7 @@ export const AuthProvider = ({ children }) => {
         otpSent,
         setOtpSent,
         handleOTPSubmit,
-        handleEmailSubmit,
+        handleGetOtp,
         handleEmailChange,
         handleOtpChange,
         isEmailValid,

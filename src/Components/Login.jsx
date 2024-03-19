@@ -10,8 +10,8 @@ const Login = () => {
     emailError,
     otpError,
     otpSent,
+    handleGetOtp,
     handleOTPSubmit,
-    handleEmailSubmit,
     handleEmailChange,
     handleOtpChange,
     isEmailValid,
@@ -105,7 +105,7 @@ const Login = () => {
                       className="btn btn-primary px-4 py-1 rounded-pill btn-login"
                       type="submit"
                       disabled={!isEmailValid()}
-                      onClick={handleEmailSubmit}
+                      onClick={handleGetOtp}
                     >
                       Send OTP
                     </button>
