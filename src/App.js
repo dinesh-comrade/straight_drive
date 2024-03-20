@@ -13,19 +13,12 @@ function App() {
   return (
     <Router>
       <AuthProvider>
-        <Navigation />
         <Suspense fallback={<Loading />}>
+          <Navigation />
+
           <Routes>
             <Route exact path="/straight_drive" element={<Home />} />
-          </Routes>
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <Routes>
             <Route path="/straight_drive/login" element={<Login />} />
-          </Routes>
-        </Suspense>
-        <Suspense fallback={<Loading />}>
-          <Routes>
             <Route path="/straight_drive/data-logs" element={<Data />} />
           </Routes>
         </Suspense>

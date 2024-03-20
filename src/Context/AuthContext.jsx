@@ -84,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     setOtp(otp);
 
     const validateOtp = (otp) => {
-      const otpRegex = /^[0-9]{4}$/;
+      const otpRegex = /^[0-9]{6}$/;
       return otpRegex.test(otp);
     };
 
