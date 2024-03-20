@@ -5,7 +5,6 @@ import { AuthProvider } from "./Context/AuthContext";
 
 function App() {
   const Loading = () => <div>Loading...</div>;
-
   const Home = lazy(() => import("./Components/Home"));
   const Login = lazy(() => import("./Components/Login"));
   const Data = lazy(() => import("./Components/Data"));
