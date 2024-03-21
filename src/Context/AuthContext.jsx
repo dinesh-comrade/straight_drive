@@ -31,8 +31,6 @@ export const AuthProvider = ({ children }) => {
           email,
         }
       );
-      console.log(response);
-      console.log("OTP Sent");
       setOtpSent(true);
     } catch (error) {
       console.log(error);
@@ -49,7 +47,6 @@ export const AuthProvider = ({ children }) => {
           otp,
         }
       );
-      console.log(email, otp, response.data);
       setEmail("");
       setOtp("");
       setEmailError("");
