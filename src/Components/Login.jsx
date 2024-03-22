@@ -83,7 +83,7 @@ const Login = () => {
                 </div>
                 <div className="mb-3 row justify-content-end">
                   <div className="col-lg-4 col-md-2 col-sm-2 col-12 d-flex justify-content-end">
-                    <Link to="/straight_drive/data-logs">
+                    <Link to="/game-log">
                       <button
                         className="btn btn-primary px-4 py-1 rounded-pill btn-login"
                         type="button"

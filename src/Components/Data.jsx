@@ -43,6 +43,7 @@ const Data = () => {
 
   const defaultColDef = useMemo(
     () => ({
+      suppressMovable: true,
       sortable: true,
       filter: true,
       floatingFilter: true,
@@ -61,7 +62,7 @@ const Data = () => {
       <div className="container">
         <div className="row">
           <div className="col-12">
-            <h1 className="text-center data-title">Data Logs</h1>
+            <h1 className="text-center data-title">Game Log</h1>
           </div>
         </div>
         <div className="data-logs-body">
@@ -77,7 +78,7 @@ const Data = () => {
                 className="form-select data-select"
                 aria-label="Default select example"
               >
-                <option selected>Company 1</option>
+                <option defaultValue={1}>Company 1</option>
                 <option value="1">Company 2</option>
                 <option value="2">Company 3</option>
                 <option value="3">Company 4</option>
@@ -96,7 +97,7 @@ const Data = () => {
                 className="form-select data-select"
                 aria-label="Default select example"
               >
-                <option selected>Machine 1</option>
+                <option defaultValue={1}>Machine 1</option>
                 <option value="1">Machine 2</option>
                 <option value="2">Machine 3</option>
                 <option value="3">Machine 4</option>
@@ -125,7 +126,7 @@ const Data = () => {
             </div>
             <div className="col-lg-5 col-md-4 col-sm-1">
               <div className="Date-container">
-                <label htmlFor="toDate" className="date-label">
+                <label htmlFor="toDate" className="date-label to-label">
                   To Date
                 </label>
                 <DatePicker
@@ -144,19 +145,13 @@ const Data = () => {
                 className="btn btn-primary px-4 py-1 rounded-pill btn-datas"
                 type="button"
               >
-                Show Datas
+                Show Data
               </button>
             </div>
           </div>
         </div>
         <div className="mb-3 row mt-5">
-          <div
-            className="ag-theme-alpine"
-            style={{
-              height: "800px",
-              width: "100%",
-            }}
-          >
+          <div className="ag-theme-alpine">
             <AgGridReact
               popupParent={document.body}
               rowData={rowData}

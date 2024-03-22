@@ -61,17 +61,11 @@ const Navigation = () => {
           </div>
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1">
-              <Link to="/straight_drive" className="links">
-                <li className="nav-item" data-bs-dismiss="offcanvas">
-                  <a
-                    className="nav-link active text-center"
-                    aria-current="page"
-                    href="#"
-                  >
-                    Home
-                  </a>
-                </li>
-              </Link>
+              <li className="nav-item" data-bs-dismiss="offcanvas">
+                <Link to="/" className="links nav-link active text-center">
+                  Home
+                </Link>
+              </li>
             </ul>
             <form
               className="d-flex justify-content-center align-items-center"
@@ -79,7 +73,7 @@ const Navigation = () => {
             >
               {isloggedIn ? (
                 <>
-                  <Link to="/straight_drive/login" className="links">
+                  <Link to="/login" className="links">
                     <button
                       className="btn btn-nav btn-outline-success rounded-pill px-4 py-1"
                       type="button"
@@ -92,13 +86,13 @@ const Navigation = () => {
                 </>
               ) : (
                 <>
-                  <Link to="/straight_drive/login" className="links">
+                  <Link to="/login" className="links">
                     <button
                       className="btn btn-nav btn-outline-success rounded-pill px-4 py-1"
                       type="button"
                       data-bs-dismiss="offcanvas"
                     >
-                      Login
+                      Game Login
                     </button>
                   </Link>
                 </>

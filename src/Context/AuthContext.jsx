@@ -25,12 +25,12 @@ export const AuthProvider = ({ children }) => {
   const handleGetOtp = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post(
-        "https://api.straightdrive.xyz/sd/orbit/login/otp",
-        {
-          email,
-        }
-      );
+      // const response = await axios.post(
+      //   "https://api.straightdrive.xyz/sd/orbit/login/otp",
+      //   {
+      //     email,
+      //   }
+      // );
       setOtpSent(true);
     } catch (error) {
       console.log(error);
@@ -40,20 +40,20 @@ export const AuthProvider = ({ children }) => {
   const handleOTPSubmit = async (e) => {
     try {
       e.preventDefault();
-      const response = await axios.post(
-        "https://api.straightdrive.xyz/sd/orbit/login/validateotp",
-        {
-          email,
-          otp,
-        }
-      );
+      // const response = await axios.post(
+      //   "https://api.straightdrive.xyz/sd/orbit/login/validateotp",
+      //   {
+      //     email,
+      //     otp,
+      //   }
+      // );
       setEmail("");
       setOtp("");
       setEmailError("");
       setOtpError("");
       setOtpSent(false);
       setIsLoggedIn(true);
-      history("/straight_drive/data-logs");
+      history("/game-log");
     } catch (error) {
       console.log(error);
     }
@@ -104,7 +104,7 @@ export const AuthProvider = ({ children }) => {
 
   const handleLogOut = () => {
     setIsLoggedIn(false);
-    history("/straight_drive/login");
+    history("/login");
   };
 
   // Data Logs States

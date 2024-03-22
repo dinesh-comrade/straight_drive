@@ -3,15 +3,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10% 0;
+  padding-top: 10%;
   height: 100%;
   background-color: #0c2428;
   color: #fff;
   position: relative;
 }
-
-/* .data-title {
-} */
 
 .data-logs-body {
   margin-top: 2%;
@@ -74,6 +71,7 @@
 .react-datepicker__day--outside-month {
   color: #ddd;
 }
+
 .data-logs .btn-datas {
   background-color: #f5a623;
   color: #000;
@@ -146,6 +144,11 @@
   transition: all 0.3s;
 }
 
+.data-logs .ag-theme-alpine {
+  height: 800px;
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .data-logs {
     padding: 15% 0;
@@ -172,10 +175,7 @@
   }
 
   .data-logs .arrows {
-    width: 10%;
-    height: 10%;
-    margin-top: 10%;
-    margin-bottom: 5%;
+    display: none;
   }
 
   .data-logs .ag-root-wrapper {
@@ -190,8 +190,17 @@
     font-size: 0.9rem;
   }
 
+  .data-logs .to-label {
+    margin-top: 10%;
+  }
+
   .data-logs .Date-container {
     align-items: center;
     justify-content: center;
+  }
+
+  .data-logs .ag-theme-alpine {
+    height: 800px;
+    width: 100%;
   }
 }

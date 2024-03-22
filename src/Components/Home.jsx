@@ -23,13 +23,13 @@ const Home = () => {
               target="_blank"
               className="btn btn-visitors rounded-pill px-4 py-1"
             >
-              Visitors
+              Visit Us
             </a>
             <Link
-              to="/straight_drive/login"
+              to="/login"
               className="btn btn-login rounded-pill px-4 py-1 ms-3"
             >
-              Login
+              Game Login
             </Link>
           </div>
         </div>
