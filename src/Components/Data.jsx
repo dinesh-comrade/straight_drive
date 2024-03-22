@@ -9,8 +9,19 @@ import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useAuth } from "../Context/AuthContext";
 
 const Data = () => {
-  const { fromDate, setFromDate, toDate, setToDate, CustomInput, rowData } =
-    useAuth();
+  const {
+    fromDate,
+    setFromDate,
+    toDate,
+    setToDate,
+    CustomInput,
+    rowData,
+    clientData,
+    machineData,
+  } = useAuth();
+
+  console.log("clientData in Data COmp: ", clientData);
+  console.log("machineData in data COmp: ", machineData);
 
   const [colDefs] = useState([
     { field: "athlete", filter: "agTextColumnFilter", tooltipField: "country" },
@@ -78,10 +89,13 @@ const Data = () => {
                 className="form-select data-select"
                 aria-label="Default select example"
               >
-                <option defaultValue={1}>Company 1</option>
-                <option value="1">Company 2</option>
-                <option value="2">Company 3</option>
-                <option value="3">Company 4</option>
+                {clientData.map((client) => {
+                  return (
+                    <option key={client.id} value={client.id}>
+                      {client.clientName}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
@@ -97,10 +111,13 @@ const Data = () => {
                 className="form-select data-select"
                 aria-label="Default select example"
               >
-                <option defaultValue={1}>Machine 1</option>
-                <option value="1">Machine 2</option>
-                <option value="2">Machine 3</option>
-                <option value="3">Machine 4</option>
+                {machineData.map((machine) => {
+                  return (
+                    <option key={machine.id} value={machine.id}>
+                      {machine.machineId}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>

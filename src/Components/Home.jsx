@@ -2,8 +2,10 @@
 import React from "react";
 import "../CSS/Home.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../Context/AuthContext";
 
 const Home = () => {
+  const { isloggedIn } = useAuth();
   return (
     <header className="home">
       <div className="container">
@@ -25,12 +27,25 @@ const Home = () => {
             >
               Visit Us
             </a>
-            <Link
-              to="/login"
-              className="btn btn-login rounded-pill px-4 py-1 ms-3"
-            >
-              Game Login
-            </Link>
+            {isloggedIn ? (
+              <>
+                <Link
+                  to="/game-log"
+                  className="btn btn-login rounded-pill px-4 py-1 ms-3"
+                >
+                  Game Log
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="btn btn-login rounded-pill px-4 py-1 ms-3"
+                >
+                  Game Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import calendar from "../assets/calendar.svg";
 import axios from "axios";
+import { toast, Bounce } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -19,43 +20,153 @@ export const AuthProvider = ({ children }) => {
   const [otpError, setOtpError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [isloggedIn, setIsLoggedIn] = useState(false);
-
+  const [token, setToken] = useState("");
+  const [userId, setUserId] = useState("");
+  const [clientData, setClientData] = useState([]);
+  const [machineData, setMachineData] = useState([]);
   const history = useNavigate();
 
   const handleGetOtp = async (e) => {
     try {
       e.preventDefault();
-      // const response = await axios.post(
-      //   "https://api.straightdrive.xyz/sd/orbit/login/otp",
-      //   {
-      //     email,
-      //   }
-      // );
-      setOtpSent(true);
+      const response = await axios.post(
+        "https://api.straightdrive.xyz/sd/orbit/login/otp",
+        {
+          email,
+        }
+      );
+      if (response) {
+        toast.success("OTP Sent Successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+        setOtpSent(true);
+      }
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
+
+  useEffect(() => {
+    if (token && userId) {
+      const handleTokenAndUserIdChange = async () => {
+        console.log("Token before response2: ", token);
+        localStorage.setItem("token", token);
+        const getToken = localStorage.getItem("token");
+        console.log(getToken);
+        if (getToken === null) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+          history("/game-log");
+          toast.success("OTP Verified Successfully", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+          });
+          const response2 = await axios.get(
+            `https://api.straightdrive.xyz/sd/orbit/client/clientList/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          console.log("response2:", response2.data.responseBody[0]);
+          setClientData(response2.data.responseBody);
+        }
+      };
+      handleTokenAndUserIdChange();
+    }
+  }, [token, userId]);
+
+  useEffect(() => {
+    if (clientData) {
+      const handleClient = async () => {
+        console.log("Client Data:", clientData);
+        console.log("Client Data[0]: ", clientData[0].id);
+
+        const response3 = await axios.get(
+          `https://api.straightdrive.xyz/sd/orbit/machine/machinesList/${clientData[0].id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        console.log(response3.data.responseBody);
+        setMachineData(response3.data.responseBody);
+      };
+      handleClient();
+    }
+  }, [clientData]);
+
+  useEffect(() => {
+    if (machineData) {
+      const handleMachine = async () => {
+        console.log("Machine Data: ", machineData);
+      };
+      handleMachine();
+    }
+  }, [machineData]);
 
   const handleOTPSubmit = async (e) => {
     try {
       e.preventDefault();
-      // const response = await axios.post(
-      //   "https://api.straightdrive.xyz/sd/orbit/login/validateotp",
-      //   {
-      //     email,
-      //     otp,
-      //   }
-      // );
+      const response = await axios.post(
+        "https://api.straightdrive.xyz/sd/orbit/login/validateotp",
+        {
+          email,
+          otp,
+        }
+      );
       setEmail("");
       setOtp("");
       setEmailError("");
       setOtpError("");
       setOtpSent(false);
-      setIsLoggedIn(true);
-      history("/game-log");
+      console.log(response.data.responseBody);
+      const tokenFromResponse = response.data.responseBody.token;
+      const userIdFromResponse = response.data.responseBody.userId;
+      setToken(tokenFromResponse);
+      setUserId(userIdFromResponse);
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
     }
   };
 
@@ -174,6 +285,8 @@ export const AuthProvider = ({ children }) => {
         setToDate,
         CustomInput,
         rowData,
+        clientData,
+        machineData,
       }}
     >
       {children}
