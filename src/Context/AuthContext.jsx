@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
   const [machineData, setMachineData] = useState([]);
   const history = useNavigate();
 
+  // Get OTP
   const handleGetOtp = async (e) => {
     try {
       e.preventDefault();
@@ -64,6 +65,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Token Generation and Storing in Local Storage
   useEffect(() => {
     if (token && userId) {
       const handleTokenAndUserIdChange = async () => {
@@ -104,12 +106,10 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token, userId]);
 
+  //Get Client Data
   useEffect(() => {
-    if (clientData) {
+    if (clientData.length > 0) {
       const handleClient = async () => {
-        console.log("Client Data:", clientData);
-        console.log("Client Data[0]: ", clientData[0].id);
-
         const response3 = await axios.get(
           `https://api.straightdrive.xyz/sd/orbit/machine/machinesList/${clientData[0].id}`,
           {
@@ -124,16 +124,9 @@ export const AuthProvider = ({ children }) => {
       };
       handleClient();
     }
-  }, [clientData]);
+  }, [clientData, token]);
 
-  useEffect(() => {
-    if (machineData) {
-      const handleMachine = async () => {
-        console.log("Machine Data: ", machineData);
-      };
-      handleMachine();
-    }
-  }, [machineData]);
+  // OTP Verification
 
   const handleOTPSubmit = async (e) => {
     try {
@@ -170,6 +163,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // Email and OTP Validation
   const handleEmailChange = (event) => {
     const email = event.target.value;
     const validateEmail = (email) => {
@@ -218,7 +212,7 @@ export const AuthProvider = ({ children }) => {
     history("/login");
   };
 
-  // Data Logs States
+  // Date Picker States
 
   const [fromDate, setFromDate] = useState(null);
   const [toDate, setToDate] = useState(null);
@@ -244,6 +238,8 @@ export const AuthProvider = ({ children }) => {
       </div>
     </>
   ));
+
+  // Ag-Grid Data Fetching
 
   const [rowData, setRowData] = useState([]);
 
