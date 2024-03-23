@@ -7,6 +7,7 @@ import { AgGridReact } from "ag-grid-react";
 import "ag-grid-community/styles/ag-grid.css";
 import "ag-grid-community/styles/ag-theme-alpine.css";
 import { useAuth } from "../Context/AuthContext";
+import { format } from "date-fns";
 
 const Data = () => {
   const {
@@ -18,49 +19,31 @@ const Data = () => {
     rowData,
     clientData,
     machineData,
+    handleClientID,
+    handleMachineID,
+    handleDataGrid,
   } = useAuth();
 
-  console.log("clientData in Data COmp: ", clientData);
-  console.log("machineData in data COmp: ", machineData);
-
+  console.log("ROw Data in Data.jsx:", rowData);
   const [colDefs] = useState([
-    { field: "athlete", filter: "agTextColumnFilter", tooltipField: "country" },
-    { field: "age", filter: "agNumberColumnFilter" },
-    { field: "country", filter: "agTextColumnFilter" },
+    {
+      field: "machineId",
+    },
     {
       field: "date",
-      filter: "agDateColumnFilter",
-      filterParams: {
-        comparator: function (filterLocalDateAtMidnight, cellValue) {
-          var dateParts = cellValue.split("/");
-          var cellDate = new Date(
-            Number(dateParts[2]),
-            Number(dateParts[1]) - 1,
-            Number(dateParts[0])
-          );
-          if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
-            return 0;
-          }
-          if (cellDate < filterLocalDateAtMidnight) {
-            return -1;
-          }
-          if (cellDate > filterLocalDateAtMidnight) {
-            return 1;
-          }
-        },
-      },
     },
+    { field: "totalOvers" },
+    { field: "totalPlayers" },
   ]);
 
   const defaultColDef = useMemo(
     () => ({
       suppressMovable: true,
-      sortable: true,
-      filter: true,
-      floatingFilter: true,
-      filterParams: {
-        debounceMs: 200,
-      },
+      // sortable: true,
+      // floatingFilter: true,
+      // filterParams: {
+      //   debounceMs: 200,
+      // },
       flex: 1,
       minWidth: 100,
       resizable: true,
@@ -88,6 +71,7 @@ const Data = () => {
               <select
                 className="form-select data-select"
                 aria-label="Default select example"
+                onChange={handleClientID}
               >
                 {clientData.map((client) => {
                   return (
@@ -110,10 +94,12 @@ const Data = () => {
               <select
                 className="form-select data-select"
                 aria-label="Default select example"
+                onChange={handleMachineID}
               >
+                <option value="">Select Machine</option>
                 {machineData.map((machine) => {
                   return (
-                    <option key={machine.id} value={machine.id}>
+                    <option key={machine.id} value={machine.machineId}>
                       {machine.machineId}
                     </option>
                   );
@@ -130,7 +116,7 @@ const Data = () => {
                 <DatePicker
                   id="fromDate"
                   selected={fromDate}
-                  onChange={(date) => setFromDate(date)}
+                  onChange={(date) => setFromDate(format(date, "yyyy-MM-dd"))}
                   dateFormat="dd/MM/yyyy"
                   customInput={<CustomInput />}
                 />
@@ -149,7 +135,7 @@ const Data = () => {
                 <DatePicker
                   id="toDate"
                   selected={toDate}
-                  onChange={(date) => setToDate(date)}
+                  onChange={(date) => setToDate(format(date, "yyyy-MM-dd"))}
                   dateFormat="dd/MM/yyyy"
                   customInput={<CustomInput />}
                 />
@@ -161,6 +147,7 @@ const Data = () => {
               <button
                 className="btn btn-primary px-4 py-1 rounded-pill btn-datas"
                 type="button"
+                onClick={handleDataGrid}
               >
                 Show Data
               </button>

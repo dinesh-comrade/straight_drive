@@ -14,14 +14,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   // Login States
+  let tokenFromLocalStorage = localStorage.getItem("token");
+  let userIdFromLocalStorage = localStorage.getItem("userId");
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [emailError, setEmailError] = useState("");
   const [otpError, setOtpError] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [isloggedIn, setIsLoggedIn] = useState(false);
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
   const [clientData, setClientData] = useState([]);
   const [machineData, setMachineData] = useState([]);
   const history = useNavigate();
@@ -67,13 +67,11 @@ export const AuthProvider = ({ children }) => {
 
   // Token Generation and Storing in Local Storage
   useEffect(() => {
-    if (token && userId) {
+    if (tokenFromLocalStorage && userIdFromLocalStorage) {
+      console.log("I am entered in useEffect");
       const handleTokenAndUserIdChange = async () => {
-        console.log("Token before response2: ", token);
-        localStorage.setItem("token", token);
-        const getToken = localStorage.getItem("token");
-        console.log(getToken);
-        if (getToken === null) {
+        console.log("Token before response2: ", tokenFromLocalStorage);
+        if (tokenFromLocalStorage === null) {
           setIsLoggedIn(false);
         } else {
           setIsLoggedIn(true);
@@ -90,21 +88,19 @@ export const AuthProvider = ({ children }) => {
             transition: Bounce,
           });
           const response2 = await axios.get(
-            `https://api.straightdrive.xyz/sd/orbit/client/clientList/${userId}`,
+            `https://api.straightdrive.xyz/sd/orbit/client/clientList/${userIdFromLocalStorage}`,
             {
               headers: {
-                Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${tokenFromLocalStorage}`,
               },
             }
           );
-
-          console.log("response2:", response2.data.responseBody[0]);
           setClientData(response2.data.responseBody);
         }
       };
       handleTokenAndUserIdChange();
     }
-  }, [token, userId]);
+  }, [tokenFromLocalStorage, userIdFromLocalStorage]);
 
   //Get Client Data
   useEffect(() => {
@@ -114,17 +110,16 @@ export const AuthProvider = ({ children }) => {
           `https://api.straightdrive.xyz/sd/orbit/machine/machinesList/${clientData[0].id}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${tokenFromLocalStorage}`,
             },
           }
         );
 
-        console.log(response3.data.responseBody);
         setMachineData(response3.data.responseBody);
       };
       handleClient();
     }
-  }, [clientData, token]);
+  }, [clientData, tokenFromLocalStorage]);
 
   // OTP Verification
 
@@ -143,11 +138,12 @@ export const AuthProvider = ({ children }) => {
       setEmailError("");
       setOtpError("");
       setOtpSent(false);
-      console.log(response.data.responseBody);
-      const tokenFromResponse = response.data.responseBody.token;
-      const userIdFromResponse = response.data.responseBody.userId;
-      setToken(tokenFromResponse);
-      setUserId(userIdFromResponse);
+      const token = response.data.responseBody.token;
+      const userId = response.data.responseBody.userId;
+      localStorage.setItem("token", token);
+      localStorage.setItem("userId", userId);
+      setIsLoggedIn(true);
+      history("/game-log");
     } catch (error) {
       toast.error(`${error}`, {
         position: "top-right",
@@ -208,6 +204,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const handleLogOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
     setIsLoggedIn(false);
     history("/login");
   };
@@ -239,21 +237,80 @@ export const AuthProvider = ({ children }) => {
     </>
   ));
 
-  // Ag-Grid Data Fetching
-
+  // Data Grid Fetching from API
+  const [clientID, setClientID] = useState(1);
+  const [machineID, setMachineID] = useState(
+    machineData && machineData[0] ? machineData[0].machineId : null
+  );
   const [rowData, setRowData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://www.ag-grid.com/example-assets/olympic-winners.json")
-      .then((res) => {
-        setRowData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  const handleClientID = (e) => {
+    setClientID(e.target.value);
+  };
 
+  const handleMachineID = (e) => {
+    setMachineID(e.target.value);
+  };
+
+  const handleDataGrid = async () => {
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${tokenFromLocalStorage}`,
+    };
+
+    const data = {
+      clientId: clientID,
+      machineId: machineID,
+      fromDate: fromDate,
+      toDate: toDate,
+    };
+
+    try {
+      const dataGridResponse = await axios.post(
+        "https://api.straightdrive.xyz/sd/orbit/gamedata/cricket/byclient",
+        data,
+        {
+          headers: headers,
+        }
+      );
+
+      console.log("Data Grid Response: ", dataGridResponse.data);
+      setRowData(dataGridResponse.data.responseBody);
+      console.log("Row Data inside Func: ", rowData);
+
+      if (dataGridResponse) {
+        toast.success("Data Fetched Successfully", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+      }
+    } catch (error) {
+      toast.error(`${error}`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        transition: Bounce,
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log("Row data:", rowData);
+  }, [rowData]);
+
+  // Context Provider
   return (
     <AuthContext.Provider
       value={{
@@ -283,6 +340,11 @@ export const AuthProvider = ({ children }) => {
         rowData,
         clientData,
         machineData,
+        handleClientID,
+        handleMachineID,
+        clientID,
+        machineID,
+        handleDataGrid,
       }}
     >
       {children}
