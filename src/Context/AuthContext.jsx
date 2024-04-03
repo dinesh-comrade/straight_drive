@@ -95,31 +95,13 @@ export const AuthProvider = ({ children }) => {
               },
             }
           );
+          console.log("Response2: ", response2.data.responseBody);
           setClientData(response2.data.responseBody);
         }
       };
       handleTokenAndUserIdChange();
     }
   }, [tokenFromLocalStorage, userIdFromLocalStorage]);
-
-  //Get Client Data
-  useEffect(() => {
-    if (clientData.length > 0) {
-      const handleClient = async () => {
-        const response3 = await axios.get(
-          `https://api.straightdrive.xyz/sd/orbit/machine/machinesList/${clientData[0].id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${tokenFromLocalStorage}`,
-            },
-          }
-        );
-
-        setMachineData(response3.data.responseBody);
-      };
-      handleClient();
-    }
-  }, [clientData, tokenFromLocalStorage]);
 
   // OTP Verification
 
@@ -238,7 +220,9 @@ export const AuthProvider = ({ children }) => {
   ));
 
   // Data Grid Fetching from API
-  const [clientID, setClientID] = useState(1);
+  const [clientID, setClientID] = useState(
+    clientData && clientData[0] ? clientData[0].clientId : null
+  );
   const [machineID, setMachineID] = useState(
     machineData && machineData[0] ? machineData[0].machineId : null
   );
@@ -251,6 +235,30 @@ export const AuthProvider = ({ children }) => {
   const handleMachineID = (e) => {
     setMachineID(e.target.value);
   };
+
+  useEffect(() => {
+    if (clientData.length > 0) {
+      const handleClient = async () => {
+        try {
+          const response3 = await axios.get(
+            `https://api.straightdrive.xyz/sd/orbit/machine/machinesList/${clientID}`,
+            {
+              headers: {
+                Authorization: `Bearer ${tokenFromLocalStorage}`,
+              },
+            }
+          );
+
+          setMachineData(response3.data.responseBody);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      if (clientID !== null) {
+        handleClient();
+      }
+    }
+  }, [clientData, tokenFromLocalStorage, clientID]);
 
   const handleDataGrid = async () => {
     const headers = {

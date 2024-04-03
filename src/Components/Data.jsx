@@ -22,9 +22,11 @@ const Data = () => {
     handleClientID,
     handleMachineID,
     handleDataGrid,
+    clientID,
   } = useAuth();
 
-  console.log("ROw Data in Data.jsx:", rowData);
+  console.log("Client ID: ", clientID);
+  console.log("Client Data in Data.jsx:", clientData);
   const [colDefs] = useState([
     {
       field: "machineId",
@@ -73,7 +75,8 @@ const Data = () => {
                 aria-label="Default select example"
                 onChange={handleClientID}
               >
-                {clientData.map((client) => {
+                <option value={0}>Select Company</option>
+                {clientData?.map((client) => {
                   return (
                     <option key={client.id} value={client.id}>
                       {client.clientName}
@@ -97,7 +100,7 @@ const Data = () => {
                 onChange={handleMachineID}
               >
                 <option value="">Select Machine</option>
-                {machineData.map((machine) => {
+                {machineData?.map((machine) => {
                   return (
                     <option key={machine.id} value={machine.machineId}>
                       {machine.machineId}
