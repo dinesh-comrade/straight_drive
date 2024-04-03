@@ -23,6 +23,8 @@ const Data = () => {
     handleMachineID,
     handleDataGrid,
     clientID,
+    firstName,
+    lastName,
   } = useAuth();
 
   console.log("Client ID: ", clientID);
@@ -59,6 +61,9 @@ const Data = () => {
         <div className="row">
           <div className="col-12">
             <h1 className="text-center data-title">Game Log</h1>
+            <h5 className="text-center data-header-para">
+              Hey {firstName} {lastName}
+            </h5>
           </div>
         </div>
         <div className="data-logs-body">

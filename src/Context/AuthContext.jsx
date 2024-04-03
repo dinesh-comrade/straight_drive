@@ -24,6 +24,8 @@ export const AuthProvider = ({ children }) => {
   const [isloggedIn, setIsLoggedIn] = useState(false);
   const [clientData, setClientData] = useState([]);
   const [machineData, setMachineData] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const history = useNavigate();
 
   // Get OTP
@@ -122,10 +124,13 @@ export const AuthProvider = ({ children }) => {
       setOtpSent(false);
       const token = response.data.responseBody.token;
       const userId = response.data.responseBody.userId;
+      setFirstName(response.data.responseBody.firstName);
+      setLastName(response.data.responseBody.lastName);
       localStorage.setItem("token", token);
       localStorage.setItem("userId", userId);
       setIsLoggedIn(true);
       history("/game-log");
+      console.log("FIRSTNAME, LASTNAME: ", response.data.responseBody);
     } catch (error) {
       toast.error(`${error}`, {
         position: "top-right",
@@ -353,6 +358,8 @@ export const AuthProvider = ({ children }) => {
         clientID,
         machineID,
         handleDataGrid,
+        firstName,
+        lastName,
       }}
     >
       {children}

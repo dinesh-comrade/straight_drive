@@ -12,7 +12,7 @@ function App() {
   const Data = lazy(() => import("./Components/Data"));
 
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <AuthProvider>
         <Suspense fallback={<Loading />}>
           <ToastContainer />
