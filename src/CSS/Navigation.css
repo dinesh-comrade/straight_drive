@@ -79,6 +79,33 @@
   transform: scaleX(1.1);
 }
 
+.user-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.dropdown-container-user {
+  position: relative;
+}
+
+.dropdown-menu-user {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transform: translateX(-50%);
+  z-index: 1000;
+  padding: 40%;
+  background-color: #f5d65a;
+  border: 2px solid #0c2428;
+  border-radius: 20px;
+  box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(20px);
+}
+
+.nav-username {
+  margin-bottom: 2px;
+}
+
 @media screen and (max-width: 992px) {
   .navbar .sidebar {
     background-color: #f5d65a;
